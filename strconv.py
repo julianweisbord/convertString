@@ -12,25 +12,41 @@ def strconv(arg_str, increment):
     final_list = []
     print "arg_str[:] ", arg_str[0:4], " ", arg_str[4:6], " ", arg_str[6:8], " ", arg_str[8:10], " ",arg_str[10:]
 
-    arg_str = int(arg_str)
+    check =numCheck(int(arg_str[10:]),increment, 59,0)
+    print check
 
-    for key in time_list:
-        # print "element: ", element
-        print "key[0]: ", key[0], "key[1]: ", key[1]
-        final_list.append(convert(key[0], key[1], increment))
-    print "initial final list: ", final_list
-    final_list = "".join(final_list)
-    print "final_list ", int(final_list)
-    return int(final_list)
+    # arg_str = int(arg_str)
 
-def convert(param, param_limit, increment):
-    print "initial params: ", param," ", param_limit, " ", increment
-    if param > param_limit:
-        param =int(increment) - param_limit
-        paramFinal = str(param)[-len(str(param))+1:]
-        return paramFinal
-    print "paramFinal :", paramFinal
-    return param
+
+# recursive call to check if num is greater than limit
+def numCheck(val,inc,limit,prev_increment):
+    val += inc
+    if val > limit:
+        val = val - limit
+        prev_increment +=1
+        print "prev increment: ", prev_increment+1
+        return numCheck(val,inc,limit, prev_increment+1)
+    else:
+        valSmaller = True
+        return valSmaller
+
+#     for key in time_list:
+#         # print "element: ", element
+#         print "key[0]: ", key[0], "key[1]: ", key[1]
+#         final_list.append(convert(key[0], key[1], increment))
+#     print "initial final list: ", final_list
+#     final_list = "".join(final_list)
+#     print "final_list ", int(final_list)
+#     return int(final_list)
+#
+# def convert(param, param_limit, increment):
+#     print "initial params: ", param," ", param_limit, " ", increment
+#     if param > param_limit:
+#         param =int(increment) - param_limit
+#         paramFinal = str(param)[-len(str(param))+1:]
+#         return paramFinal
+#     print "paramFinal :", paramFinal
+#     return param
 
 
 def main():
@@ -40,7 +56,7 @@ def main():
 
     while 0 < 1:
         stringy = strconv(generic, increment)
-        stringy += increment
+        # stringy += increment
         print "stringy: ", stringy
         time.sleep(5)
 
@@ -50,6 +66,27 @@ if __name__ == '__main__':
 # probably best to chop up string into 5 manageable chunks
 #all of these units are in base 10 but have limits on size.
 # 2015, 08, 21, 10 38
+#take arg_str, convert to an integer, then increment by increment var.
+# The increment will have to correspond to the right digit position.
+# If that position is greater than the limit specified in time_list then the
+# list must recursively go in reverse and increment the previous value by:
+# 1 for each time you had to run the function that showed that the current value
+# was greater than the limit.
+
+
+
+
+
+
+
+
+# the (increment var)/limit,
+# but only increment by first position
+# ie: increment by 200 hours, 200/60 =3.333, so increment
+# previous value by 3 then if next value plus 3 is greater than its limit say 30 +3
+# then 33/31 (not all will be +1 ) = 1.064
+
+
 
 # 2 0 1 5 0 8 2 1 1 0 3 8
 # str[0,1,2,3,5,7,9],11 = base 10
