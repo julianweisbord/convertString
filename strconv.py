@@ -1,27 +1,24 @@
 import time
 
 
-# add weird month anomolies
+# add month anomolies
 def strconv(arg_str, increment):
     if len(arg_str) !=12:
         raise ValueError("Not enough values in date")
 
-    time_dict = {
-        "year_limit": [arg_str[0:4], 9999],
-        "month_limit": [arg_str[4:6], 12],
-        "day_limit": [arg_str[6:8], 31],
-        "hour_limit": [arg_str[8:10], 23],
-        "minute_limit": [arg_str[10:], 59]
-    }
+    time_list = [
+        [arg_str[0:4], 9999], [arg_str[4:6], 12], [arg_str[6:8], 31], [arg_str[8:10], 23], [arg_str[10:], 59]
+    ]
     final_list = []
     print "arg_str[:] ", arg_str[0:4], " ", arg_str[4:6], " ", arg_str[6:8], " ", arg_str[8:10], " ",arg_str[10:]
 
     arg_str = int(arg_str)
 
-    for element,key in time_dict.iteritems():
+    for key in time_list:
+        # print "element: ", element
         print "key[0]: ", key[0], "key[1]: ", key[1]
         final_list.append(convert(key[0], key[1], increment))
-
+    print "initial final list: ", final_list
     final_list = "".join(final_list)
     print "final_list ", int(final_list)
     return int(final_list)
