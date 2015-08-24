@@ -14,6 +14,8 @@ def strconv(arg_str, increment):
     minutes = int(arg_str[10:])
     prev_increment = 0
     minutes +=increment
+    # for list[x][0] run this and increment x to make adaptable for the other
+    # time values.
     while minutes > time_list[4][1]:
         # numCheck(minutes,increment)
         if minutes > time_list[4][1]:
