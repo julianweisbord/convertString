@@ -11,24 +11,30 @@ def strconv(arg_str, increment):
     ]
     final_list = []
     print "arg_str[:] ", arg_str[0:4], " ", arg_str[4:6], " ", arg_str[6:8], " ", arg_str[8:10], " ",arg_str[10:]
-
-    check =numCheck(int(arg_str[10:]),increment, 59,0)
-    print check
+    minutes = int(arg_str[10:])
+    prev_increment = 0
+    minutes +=increment
+    while minutes > time_list[4][1]:
+        # numCheck(minutes,increment)
+        if minutes > time_list[4][1]:
+            minutes -= time_list[4][1]
+        prev_increment+=1
+        print "prev_increment: ", prev_increment
+    print "minutes + increment: ", minutes
 
     # arg_str = int(arg_str)
 
 
 # recursive call to check if num is greater than limit
-def numCheck(val,inc,limit,prev_increment):
-    val += inc
-    if val > limit:
-        val = val - limit
-        prev_increment +=1
-        print "prev increment: ", prev_increment+1
-        return numCheck(val,inc,limit, prev_increment+1)
-    else:
-        valSmaller = True
-        return valSmaller
+# def numCheck(val,inc):
+#     val += inc
+#     if val > limit:
+#         val = val - limit
+
+
+    # else:
+    #     valSmaller = True
+    #     return valSmaller
 
 #     for key in time_list:
 #         # print "element: ", element
@@ -53,12 +59,9 @@ def main():
     increment = 100
     generic = "201508211038"
     # strconv(generic)
+    stringy = strconv(generic, increment)
+    print "stringy: ", stringy
 
-    while 0 < 1:
-        stringy = strconv(generic, increment)
-        # stringy += increment
-        print "stringy: ", stringy
-        time.sleep(5)
 
 
 if __name__ == '__main__':
