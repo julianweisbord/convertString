@@ -6,55 +6,33 @@ def strconv(arg_str, increment):
     if len(arg_str) !=12:
         raise ValueError("Not enough values in date")
 
+
     time_list = [
         [arg_str[0:4], 9999], [arg_str[4:6], 12], [arg_str[6:8], 31], [arg_str[8:10], 23], [arg_str[10:], 59]
     ]
     final_list = []
     print "arg_str[:] ", arg_str[0:4], " ", arg_str[4:6], " ", arg_str[6:8], " ", arg_str[8:10], " ",arg_str[10:]
-    minutes = int(arg_str[10:])
+    times = int(time_list[4][0])
     prev_increment = 0
-    minutes +=increment
+    # times +=increment
+    x = 4
+    y=0
     # for list[x][0] run this and increment x to make adaptable for the other
     # time values.
-    while minutes > time_list[4][1]:
-        # numCheck(minutes,increment)
-        if minutes > time_list[4][1]:
-            minutes -= time_list[4][1]
-        prev_increment+=1
-        print "prev_increment: ", prev_increment
-    print "minutes + increment: ", minutes
-
+    for y in xrange(0,4):
+        print "here is x and y ", x, y
+        while times +increment > time_list[x][1]:
+            # numCheck(times,increment)
+            # if times > time_list[x][1]:
+            times =times - time_list[x][1]
+            prev_increment+=1
+            print "prev_increment: ", prev_increment
+        print "time + increment: ", times + increment
+        increment -= time_list[x][1]
+        final_list = final_list.append(times)
+        x-=1
+    print "final_list"
     # arg_str = int(arg_str)
-
-
-# recursive call to check if num is greater than limit
-# def numCheck(val,inc):
-#     val += inc
-#     if val > limit:
-#         val = val - limit
-
-
-    # else:
-    #     valSmaller = True
-    #     return valSmaller
-
-#     for key in time_list:
-#         # print "element: ", element
-#         print "key[0]: ", key[0], "key[1]: ", key[1]
-#         final_list.append(convert(key[0], key[1], increment))
-#     print "initial final list: ", final_list
-#     final_list = "".join(final_list)
-#     print "final_list ", int(final_list)
-#     return int(final_list)
-#
-# def convert(param, param_limit, increment):
-#     print "initial params: ", param," ", param_limit, " ", increment
-#     if param > param_limit:
-#         param =int(increment) - param_limit
-#         paramFinal = str(param)[-len(str(param))+1:]
-#         return paramFinal
-#     print "paramFinal :", paramFinal
-#     return param
 
 
 def main():
