@@ -1,42 +1,48 @@
-import time
 
 
-# add month anomolies
+#minute: 0-59, hour: 0-23, day: 1-31, month:1-12, year: 0-9999
+# add month anomolies, leap year stuff
 def strconv(arg_str, increment):
     if len(arg_str) !=12:
         raise ValueError("Not enough values in date")
 
 
     time_list = [
-        [arg_str[0:4], 9999], [arg_str[4:6], 12], [arg_str[6:8], 31], [arg_str[8:10], 23], [arg_str[10:], 59]
+        [arg_str[0:4], 9999], [arg_str[4:6], 11], [arg_str[6:8], 30], [arg_str[8:10], 23], [arg_str[10:], 59]
     ]
     final_list = []
     print "arg_str[:] ", arg_str[0:4], " ", arg_str[4:6], " ", arg_str[6:8], " ", arg_str[8:10], " ",arg_str[10:]
+
     times = int(time_list[4][0])
-    prev_increment = 0
-    # times +=increment
+    prev_increment= 0
+
     x = 4
-    y=0
-    # for list[x][0] run this and increment x to make adaptable for the other
-    # time values.
-    for y in xrange(0,4):
-        print "here is x and y ", x, y
+    for z in xrange (0, 5):
         while times +increment > time_list[x][1]:
-            # numCheck(times,increment)
-            # if times > time_list[x][1]:
-            times =times - time_list[x][1]
+
+            times =times - time_list[x][1] -1
+
             prev_increment+=1
             print "prev_increment: ", prev_increment
         print "time + increment: ", times + increment
-        increment -= time_list[x][1]
-        final_list = final_list.append(times)
+        final_list.append(times +increment)
+
+        print "increment ", increment
+
         x-=1
-    print "final_list"
+        times= int(time_list[x][0])
+
+        increment = prev_increment
+        prev_increment = 0
+
+
+    print "final_list", final_list
+    return str(final_list)
     # arg_str = int(arg_str)
 
 
 def main():
-    increment = 100
+    increment = 200000
     generic = "201508211038"
     # strconv(generic)
     stringy = strconv(generic, increment)
@@ -48,7 +54,7 @@ if __name__ == '__main__':
     main()
 # probably best to chop up string into 5 manageable chunks
 #all of these units are in base 10 but have limits on size.
-# 2015, 08, 21, 10 38
+# 2015, 08, 21, 10, 38
 #take arg_str, convert to an integer, then increment by increment var.
 # The increment will have to correspond to the right digit position.
 # If that position is greater than the limit specified in time_list then the
