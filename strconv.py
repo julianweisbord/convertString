@@ -1,5 +1,4 @@
 
-
 #minute: 0-59, hour: 0-23, day: 1-31, month:1-12, year: 0-9999
 # add month anomolies, leap year stuff
 def strconv(arg_str, increment):
@@ -10,6 +9,7 @@ def strconv(arg_str, increment):
     time_list = [
         [arg_str[0:4], 9999], [arg_str[4:6], 11], [arg_str[6:8], 30], [arg_str[8:10], 23], [arg_str[10:], 59]
     ]
+
     final_list = []
     print "arg_str[:] ", arg_str[0:4], " ", arg_str[4:6], " ", arg_str[6:8], " ", arg_str[8:10], " ",arg_str[10:]
 
@@ -18,9 +18,16 @@ def strconv(arg_str, increment):
 
     x = 4
     for z in xrange (0, 5):
+
+        if int(time_list[1][0]) == (4 | 6 | 9 | 11):
+            time_list[2][1] == 29
+        if int(time_list[1][0]) == 2:
+            time_list[2][1] == 27
+
         while times +increment > time_list[x][1]:
 
             times =times - time_list[x][1] -1
+            print time_list[x][1]
 
             prev_increment+=1
             print "prev_increment: ", prev_increment
