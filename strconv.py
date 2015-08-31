@@ -4,8 +4,7 @@
 def strconv(arg_str, increment):
     if len(arg_str) !=12:
         raise ValueError("Not enough values in date")
-
-
+#gives the default limits to each time chunk and the user input for each time chunk.
     time_list = [
         [arg_str[0:4], 9999], [arg_str[4:6], 11], [arg_str[6:8], 30], [arg_str[8:10], 23], [arg_str[10:], 59]
     ]
@@ -18,11 +17,12 @@ def strconv(arg_str, increment):
 
     x = 4
     for z in xrange (0, 5):
+        #all but feb don't work
+        if int(time_list[1][0]) == (4 or 6 or 9 or 11):
+            time_list[2][1] = 29
 
-        if int(time_list[1][0]) == (4 | 6 | 9 | 11):
-            time_list[2][1] == 29
         if int(time_list[1][0]) == 2:
-            time_list[2][1] == 27
+            time_list[2][1] = 27
 
         while times +increment > time_list[x][1]:
 
@@ -41,16 +41,16 @@ def strconv(arg_str, increment):
 
         increment = prev_increment
         prev_increment = 0
-
-
-    print "final_list", final_list
+    print "start date: ", arg_str.split()
+    final_list= final_list[::-1]
+    print "final date", final_list
     return str(final_list)
     # arg_str = int(arg_str)
 
 
 def main():
-    increment = 200000
-    generic = "201508211038"
+    increment = 20000
+    generic = "201504211038"
     # strconv(generic)
     stringy = strconv(generic, increment)
     print "stringy: ", stringy
