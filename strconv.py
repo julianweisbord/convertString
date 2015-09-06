@@ -22,7 +22,11 @@ def strconv(arg_str, increment):
             time_list[2][1] = 29
 
         if int(time_list[1][0]) == 2:
-            time_list[2][1] = 27
+            # for leap years
+            if int(time_list[0][0])%4 ==0:
+                time_list[2][1] = 28
+            else:
+                time_list[2][1] = 27
 
         while times +increment > time_list[x][1]:
 
@@ -50,9 +54,11 @@ def strconv(arg_str, increment):
 
 def main():
     increment = 20000
-    generic = "201504211038"
+    date = raw_input("Enter a 12 digit date: ")
+    if date == None:
+        date= "201602211038"
     # strconv(generic)
-    stringy = strconv(generic, increment)
+    stringy = strconv(date, increment)
     print "stringy: ", stringy
 
 
